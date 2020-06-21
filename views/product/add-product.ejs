@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %>
+
+  <%- include('../includes/navigation.ejs') %>
+
+  <main>
+
+    <form class="product-form" action="/admin/products" method="POST" enctype="multipart/form-data">
+
+      <div>
+        <label for="title">title</label>
+        <input type="text" name="title" id="title" value="<%= product.title %>" class="<%= validationError.find(err => err.param == 'title') ? 'invalid' : '' %>">
+      </div>
+
+      <div>
+        <label for="price">price</label>
+        <input type="number" name="price" id="price" step="0.01" value="<%= product.price %>" class="<%= validationError.find(err => err.param == 'price') ? 'invalid' : '' %>">
+      </div>
+
+      <div>
+        <label for="description">description</label>
+        <textarea name="description" id="description" rows="5" class="<%= validationError.find(err => err.param == 'description')  ? 'invalid' : '' %>" ><%= product.description %></textarea>
+      </div>
+
+      <div>
+
+          <label for="description">Image</label>
+          <input
+            class="<%= validationError.find(err => err.param == 'imageUrl')  ? 'invalid' : '' %>"
+            type="file"
+            name="image"
+            id="image"
+          >
+
+      </div>
+
+      <div>
+        <input type="hidden" value="<%= csrfToken %>" name="_csrf"/>
+        <button type="submit">Add Product</button>
+      </div>
+
+    </form>
+
+  </main>
+
+<%- include('../includes/end.ejs') %>

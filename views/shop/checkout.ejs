@@ -1,0 +1,41 @@
+<%- include('../includes/head.ejs') %>
+
+  <%- include('../includes/navigation.ejs') %>
+
+    <main>
+
+      <% for (let product of prods) { %>
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= product.productId.title %></h5>
+                <p class="card-text">Quantity<%= product.quantity || 'undefined' %></p>
+                <a href="/products/<%= product._id %>" class="btn btn-primary">details</a>
+
+                <a href="/admin/edit-products/<%= product._id %>?edit=true" class="btn btn-primary">Edit</a>
+                <a href="/admin/delete-cart/<%= product._id %>" class="btn btn-primary">Delete</a>
+              </div>
+            </div>
+          </div>
+          <button id="order-btn" class="btn">Order</button>
+          <div class="centered">
+
+              <script src="https://js.stripe.com/v3/"></script>
+              <script>
+                var stripe = Stripe('pk_test_51GvnpmBn5YPjVkQUPKyESlQrGTkWncgvi7UZHYqZef6nrdXASJ30f1TCSk6DrIY1n9E4AKYza20YoirNaxRZHRuV00VSsDLsKF');
+
+                var orderBtn = document.getElementById('order-btn')
+
+                orderBtn.addEventListener('click', function() {
+                  stripe.redirectToCheckout({
+                    sessionId: '<%= sessionId %>'
+                  })
+                })
+              </script>
+          </div>
+
+      <% } %>
+
+    </main>
+
+<%- include('../includes/end.ejs') %>

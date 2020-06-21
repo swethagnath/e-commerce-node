@@ -1,0 +1,25 @@
+<%- include('../includes/head.ejs') %>
+
+  <%- include('../includes/navigation.ejs') %>
+
+  <main>
+
+    <form class="login-form" action="/login" method="POST">
+
+      <div>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" />
+      </div>
+
+      <div>
+        <label for="password">password</label>
+        <input type="string" name="password" id="password" value="" />
+      </div>
+
+      <button type="submit">Login</button>
+      <input type="hidden" value="<%= csrfToken %>" name="_csrf"/>
+    </form>
+
+  </main>
+
+<%- include('../includes/end.ejs') %>

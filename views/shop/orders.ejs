@@ -1,0 +1,51 @@
+<%- include('../includes/head.ejs') %>
+
+  <%- include('../includes/navigation.ejs') %>
+
+    <main>
+
+      <% if(hasProducts) { %>
+        <%= console.log('orders')%>
+        <%for(let order  of orders){%>
+          <%= console.log('order', order)%>
+            <div class="grid">
+              <%order.products.forEach(prod => {%>
+                <article class="card product-item">
+                  <%= console.log('prod', prod)%>
+                  <header class="card__header">
+                      <h1 class="product__title"><%= prod.product.title %></h1>
+                  </header>
+
+                  <div class="card__image">
+                      <img src="https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png" alt="A Book">
+                  </div>
+
+                  <div class="card__content">
+                      <h2 class="product__price"><%= prod.product.price %></h2>
+                      <p class="product__description"><%= prod.product.description %></p>
+                  </div>
+
+                  <div class="card__actions">
+                      <a href="/products/<%= prod.product._id %>" class="btn">Details</a>
+                  </div>
+
+                  <div class="card__actions">
+                      <a href="/orders/<%= order._id %>" class="btn">Invoice</a>
+                  </div>
+
+              <%})%>
+              
+              </article>
+            </div>
+        <%}%>
+
+
+      <% } else { %>
+
+          <h1>has no products</h1>
+
+      <% } %>
+
+    </main>
+
+<%- include('../includes/end.ejs') %>

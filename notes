@@ -1,0 +1,20 @@
+npm init
+
+// start by npm
+//start is a reserved keyword
+npm start by default go to package json -- scripts--{start: 'node app.js'}
+
+
+custom server running
+//npm run start-server
+
+//installation third party
+
+npm install nodemon --save-dev
+
+npm install nodemon -g save-dev
+
+
+// to start use
+
+npm start

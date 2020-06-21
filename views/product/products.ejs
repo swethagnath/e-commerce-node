@@ -1,0 +1,47 @@
+<%- include('../includes/head.ejs') %>
+
+  <%- include('../includes/navigation.ejs') %>
+
+    <div class="row">
+
+
+
+        <% for (let product of prods) { %>
+
+            <div class="col-sm-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= product.title %></h5>
+                  <p class="card-text"><%= product.description %></p>
+
+                  <label for="imageUrl">Image</label>
+
+
+                  <a><img src="/<%= product.imageUrl %>"></a>
+
+
+                  <a href="/products/<%= product._id %>" class="btn btn-primary">details</a>
+
+
+                  <a href="/admin/edit-products/<%=product._id%>?edit=true" class="btn btn-primary">Edit</a>
+
+
+                  <button type="button" class="btn" onclick="deleteProduct(this)">delete---</button>
+
+                  <input type="hidden" value="<%= csrfToken %>" name="_csrf"/>
+
+                  <input type="hidden" value="<%= product._id %>" name="productId" />
+
+                </div>
+              </div>
+            </div>
+
+        <% } %>
+
+
+
+    </div>
+
+<%- include('../includes/end.ejs') %>
+
+<script src="/js/admin.js"></script>

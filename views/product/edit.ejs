@@ -1,0 +1,64 @@
+<%- include('../includes/head.ejs') %>
+
+  <%- include('../includes/navigation.ejs') %>
+
+  <main>
+
+    <form class="product-form" action="/admin/<% if(editing){ %>edit-products/<%=product._id%><% } else { %>products<% } %>" method="POST" enctype="multipart/form-data">
+
+      <div>
+        <label for="title">title</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value="<% if(editing || hasError) {%> <%= product.title %> <%}%>"
+          class="<%= validationError.find(err => err.param == 'title') ? 'invalid' : ''%>"
+         />
+      </div>
+
+      <div>
+        <label for="price">price</label>
+        <input
+          type="number"
+          name="price"
+          id="price"
+          step="0.01"
+          value="<% if(editing || hasError) {%> <%= product.price %> <%}%>"
+          class="<%= validationError.find(err => err.param == 'price') ? 'invalid' : ''%>"
+        />
+      </div>
+
+      <div>
+        <label for="description">description</label>
+        <textarea
+          name="description"
+          id="description"
+          class="<%= validationError.find(err => err.param == 'description') ? 'invalid' : ''%>"
+          rows="5" >
+            <% if(editing || hasError) {%> <%= product.description %> <%}%>
+          </textarea>
+      </div>
+
+      <div>
+
+        <input
+          class="<%= validationError.find(err => err.param == 'imageUrl')  ? 'invalid' : '' %>"
+          type="file"
+          name="image"
+          id="image"
+          value="<% if (editing || hasError) { %>/<%= product.imageUrl %><% } %>"
+        >
+      <div>
+
+      <% if (editing || hasError) { %>
+          <input type="hidden" value="<%= product._id %>" name="productId">
+      <% } %>
+
+      <button type="submit"><% if (editing) { %> Update Product <% } else { %>Add Product<% } %></button>
+      <input type="hidden" value="<%= csrfToken %>" name="_csrf"/>
+    </form>
+
+  </main>
+
+<%- include('../includes/end.ejs') %>

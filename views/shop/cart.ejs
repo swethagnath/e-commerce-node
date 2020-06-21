@@ -1,0 +1,38 @@
+<%- include('../includes/head.ejs') %>
+
+  <%- include('../includes/navigation.ejs') %>
+    <%= console.log(hasCartItems)%>
+
+    <% if(hasCartItems) {%>
+      <%= console.log(prods)%>
+      <% for (let product of prods) { %>
+          <%= %>
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= product.productId.title %></h5>
+                <p class="card-text"><%= product.quantity %></p>
+                <a href="/products/<%= product._id %>" class="btn btn-primary">details</a>
+
+                <form action="/admin/delete-cart" method="POST">
+                  <input type="hidden" value="<%= csrfToken %>" name="_csrf"/>
+                  <input type="hidden" value="<%= product._id %>" name="productId" />
+                  <button class="btn" type="submit" class="btn btn-primary">Delete</button>
+                </form>
+
+                <a href="/admin/edit-products/<%= product._id %>?edit=true" class="btn btn-primary">Edit</a>
+                <a href="/admin/delete-cart/<%= product._id %>" class="btn btn-primary">Delete</a>
+                <a href="/checkout">checkout</a>
+              </div>
+            </div>
+
+          </div>
+
+
+      <% } %>
+
+
+
+    <% } %>
+
+<%- include('../includes/end.ejs') %>
