@@ -270,8 +270,7 @@ exports.postReset = (req, res) => {
 exports.getNewPassword = (req, res) => {
 
   const token  = req.params.token
-  console.log('token', token)
-
+  
   // resetTokenExpiration: { $gt: Date.now()  + 4600000}
   User.findOne({ resetToken: token })
 

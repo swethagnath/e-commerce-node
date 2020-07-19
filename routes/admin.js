@@ -15,6 +15,7 @@ const isAuth  = require('../middleware/is-auth')
 // /admin/add-product => get
 router.get('/add-product', isAuth, productsController.getAddProduct )
 
+
 router.post('/products', [
 
   body('title', 'password mininmum length required')

@@ -63,6 +63,7 @@ exports.getCart= (req, res, next) => {
     .populate('cart.items.productId')
     .execPopulate()
     .then(products => {
+        console.log(products)
         res.status('404').render('shop/cart', {
           pageTitle: 'Your Cart',
           path: '/cart',
